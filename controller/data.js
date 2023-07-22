@@ -10,12 +10,14 @@ exports.postAlldata = async (req, res) => {
         const data = response.data;
         // res.json(data);
         {
-            data.map(async (item) => {
+            for (let i = 0; i < data.length; i++) {
+                // data.map(async (item) => {
 
-                const fetchdata = new apiData(item);
+                let fetchdata = new apiData(data[i]);
                 await fetchdata.save();
-                res.send("data added successfully");
-            })
+
+                // })
+            }
         }
     }
 
@@ -27,18 +29,18 @@ exports.postAlldata = async (req, res) => {
 };
 exports.getAlldata = async (req, res) => {
     try {
-        const users = await apiData.find({});
+        const datas = await apiData.find({});
         return res.status(200).send({
-            userCount: data.length,
+            userCount: datas.length,
             success: true,
             message: "all data",
-            users,
+            datas,
         })
     } catch (error) {
         console.log(error);
         return res.status(500).send({
             success: false,
-            message: "Error in Get all data",
+            message: "Error in Get All datas",
             error,
         })
     }

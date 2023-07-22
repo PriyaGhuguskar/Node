@@ -2,13 +2,13 @@ const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const connectDB = require('./configdb/db')
-const axios = require('axios');
 
 dotenv.config()
 
 connectDB();
 
 const dataRoutes = require('./routes/fetchdata')
+const { postAlldata } = require('./controller/data')
 
 
 const app = express()
@@ -17,29 +17,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+app.use('/', postAlldata)
 app.use('/', dataRoutes)
+
 
 
 let thirdPartyUrl = `https://s3.amazonaws.com/roxiler.com/product_transaction.json`
 
-// app.post('/', async (req, res) => {
-//     try {
-//         const response = await axios.get('https://s3.amazonaws.com/roxiler.com/product_transaction.json');
-//         const data = response.data;
-//         // res.json(data);
-//         {
-//             data.map(async (item) => {
-
-//                 const fetchdata = new apiData(item);
-//                 await fetchdata.save();
-//                 res.send("data added successfully");
-//             })
-//         }
-//     } catch (error) {
-//         // Handle errors
-//         res.status(500).json({ error: `${error}An error occurred while fetching data` });
-//     }
-// });
 
 
 const PORT = process.env.PORT || 8080
