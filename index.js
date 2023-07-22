@@ -22,11 +22,19 @@ app.use('/', dataRoutes)
 
 let thirdPartyUrl = `https://s3.amazonaws.com/roxiler.com/product_transaction.json`
 
-// app.get('/', async (req, res) => {
+// app.post('/', async (req, res) => {
 //     try {
 //         const response = await axios.get('https://s3.amazonaws.com/roxiler.com/product_transaction.json');
 //         const data = response.data;
-//         res.json(data);
+//         // res.json(data);
+//         {
+//             data.map(async (item) => {
+
+//                 const fetchdata = new apiData(item);
+//                 await fetchdata.save();
+//                 res.send("data added successfully");
+//             })
+//         }
 //     } catch (error) {
 //         // Handle errors
 //         res.status(500).json({ error: `${error}An error occurred while fetching data` });

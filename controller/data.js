@@ -29,16 +29,16 @@ exports.getAlldata = async (req, res) => {
     try {
         const users = await apiData.find({});
         return res.status(200).send({
-            userCount: users.length,
+            userCount: data.length,
             success: true,
-            message: "all users data",
+            message: "all data",
             users,
         })
     } catch (error) {
         console.log(error);
         return res.status(500).send({
             success: false,
-            message: "Error in Get All Users",
+            message: "Error in Get all data",
             error,
         })
     }
